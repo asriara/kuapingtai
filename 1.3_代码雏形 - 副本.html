@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>01-05-字符串练习-使用replace实现类似vue插值表达式的功能</title>
+	<script type="text/javascript">
+ 	/*
+	一个replace的复杂应用（模板的数据导入），
+                   有三个输入框和一个按钮，点击按钮，将输入的值体现三个变量中。
+                   将vue中的{{变量名}}替换成变量的值，就可以应用这个repalcer来实现*/
+	</script>
+</head>
+
+<body>
+	<div class="template" hidden>
+		<div>姓名：{{name}}</div>
+		<div>年龄：{{age}}</div>
+		<div>班级：{{clasz}}</div>
+	</div>
+
+	<input type="text" id="studentname" value="zhangsan"><br>
+	<input type="text" id="age" value="20"><br>
+	<input type="text" id="banji" value="软件xxxx"><br>
+	<input type="button" value="提交" onclick="toDIV()">
+
+	<div class="real">
+		<div>姓名：</div>
+		<div>年龄：</div>
+		<div>班级：</div>
+	</div>
+
+	<script>
+            function toDIV(){
+			let template = document.getElementsByClassName("template")[0];
+			let str = template.innerHTML;
+	
+ 		let inputname = document.getElementById("studentname");
+
+			let reg = /{{(.+?)}}/g;
+
+			let newstr = str.replace(reg, function (node, key) { //node = "{{name}}"" key= "name"
+
+				return {
+					name:inputname.value,
+				}[key];
+			});
+
+			let template2 = document.getElementsByClassName("real")[0];
+
+			template2.innerHTML = newstr;
+			}
+	</script>
+</body>
+
+</html>
